@@ -14,4 +14,9 @@ export class AppController {
   getName(@Body() params): string {
     return `hello ${params.name}`;
   }
+
+  @Get('getAllUser')
+  getAllUser(): any {
+    return this.appService.findAll();
+  }
 }
