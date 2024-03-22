@@ -1,5 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { RedisService } from 'nestjs-redis';
+import { Inject, Injectable } from '@nestjs/common';
+import Redis from 'ioredis';
+import { InjectRedis } from '@liaoliaots/nestjs-redis';
 
 @Injectable()
-export class RedisConfigService {}
+export class RedisCommonService {
+    constructor(@InjectRedis() private readonly redis: Redis){}
+
+    getKey(key) {
+        const data = this.redis.get(key);
+        return data;
+    }
+}

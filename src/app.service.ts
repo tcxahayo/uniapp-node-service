@@ -1,14 +1,7 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { User } from './entity/user.entity';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  // constructor(
-  //   @Inject('APP_REPOSITORY')
-  //   private userRepository: Repository<User>,
-  // ) {}
-
   getHello(): string {
     return 'Hello World!';
   }

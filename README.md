@@ -78,3 +78,8 @@ sudo service mysql restart -->
 
 <!-- ACL SETUSER admin nopass ~* +@all -@dangerous -->
 
+<!-- redis -->
+<!-- sudo vi /etc/redis/redis.conf redis配置文件 -->
+<!-- 进入redis redis-cli -->
+<!-- 密码登录 AUTH xxx -->
+<!-- 重启 sudo service redis-server restart -->
