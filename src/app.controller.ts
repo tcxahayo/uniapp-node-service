@@ -1,22 +1,21 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+
+import { Body, Post, Get, Controller } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Public } from './utils/publicAuth';
 
 @Controller('app')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+    constructor(private readonly appService: AppService) { }
 
-  @Get('getHello')
-  getHello(): string {
-    return this.appService.getHello();
-  }
+    @Public()
+    @Get('getHello')
+    getHello(): string {
+        return this.appService.getHello();
+    }
 
-  @Post('getName')
-  getName(@Body() params): string {
-    return `hello ${params.name}`;
-  }
-
-  @Get('getAllUser')
-  getAllUser(): any {
-    return this.appService.findAll();
-  }
+    @Public()
+    @Post('getAllUser')
+    getAllUser(): any {
+        return this.appService.findAll();
+    }
 }

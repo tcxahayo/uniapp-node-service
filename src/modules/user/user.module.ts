@@ -6,8 +6,8 @@ import { UserController } from './user.controller';
 import { RedisCommonService } from 'src/redis/redis.service';
 
 @Module({
-  imports: [DatabaseModule],
-  providers: [...userProviders, UserService, RedisCommonService],
-  controllers: [UserController],
+    imports: [DatabaseModule],
+    providers: [...userProviders, UserService, RedisCommonService],
+    controllers: [UserController],
 })
-export class UserModule {}
+export class UserModule { }

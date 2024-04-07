@@ -83,3 +83,6 @@ sudo service mysql restart -->
 <!-- 进入redis redis-cli -->
 <!-- 密码登录 AUTH xxx -->
 <!-- 重启 sudo service redis-server restart -->
+
+ <!-- 快速生成实体类 -->
+<!-- npx typeorm-model-generator -h localhost -p 3306 -u root -x 12345678 -e mysql -o ./entities --noConfig true --ce pascal --cp camel -d game --tables user -->
