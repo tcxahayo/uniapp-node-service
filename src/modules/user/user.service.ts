@@ -40,19 +40,33 @@ export class UserService {
     /**
      * 获取用户信息
      */
-    getUserInfo = (openUid) => {
+    getUserInfo = (openUid: string) => {
         return this.userRepository.findOne({ where: { openUid } });
     };
     /**
      * 初始化用户信息
      */
-    initUserInfo = (openUid) => {
+    initUserInfo = (openUid: string) => {
         return this.userRepository.insert({ openUid });
     };
     /**
      * 创建token
      */
-    createToken(code) {
+    createToken(code: string) {
         return createJwtToken({ code });
     }
+    /**
+     * 更新用户信息
+     */
+    updateUserInfo = ({
+        nick,
+        avatar,
+        openUid,
+    }: {
+        nick: string;
+        avatar: string;
+        openUid: string;
+    }) => {
+        return this.userRepository.update({ openUid }, { nick, avatar });
+    };
 }

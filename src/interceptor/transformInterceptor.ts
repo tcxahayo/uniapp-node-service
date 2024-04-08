@@ -18,7 +18,6 @@ export class TransformInterceptor implements NestInterceptor {
         const res = ctx.getResponse();
         return next.handle().pipe(
             map((data) => {
-                console.log('===|res.statusCode|===', res.statusCode)
                 if (res.statusCode === HttpStatus.CREATED) {
                     res.status(HttpStatus.OK);
                 }

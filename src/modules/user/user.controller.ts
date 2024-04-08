@@ -4,11 +4,13 @@ import { RedisCommonService } from 'src/redis/redis.service';
 import { Public } from 'src/utils/publicAuth';
 import { JWT } from 'src/utils/jwtAuth';
 import { isEmpty } from 'src/utils/tools';
+import { ClsService } from 'nestjs-cls';
 @Controller('user')
 export class UserController {
     constructor(
         private readonly userService: UserService,
         private readonly redisCommonService: RedisCommonService,
+        private readonly cls: ClsService,
     ) {}
 
     /**
@@ -33,5 +35,30 @@ export class UserController {
             await this.userService.initUserInfo(objRes.openid);
         }
         return this.userService.createToken(objRes.openid);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    @Post('getUserInfo')
+    getUserInfo() {
+        const openUid = this.cls.get('openUid');
+        return this.userService.getUserInfo(openUid);
+    }
+
+    /**
+     * 更新用户信息
+     */
+    @Post('updateUserInfo')
+    async updateUserInfo(
+        @Body() param: { nick: string; avatar: string },
+    ): Promise<string> {
+        const { nick, avatar } = param;
+        if (isEmpty(nick) || isEmpty(avatar)) {
+            throw new HttpException('缺少必要参数', 404);
+        }
+        const openUid = this.cls.get('openUid');
+        await this.userService.updateUserInfo({ nick, avatar, openUid });
+        return '更新成功';
     }
 }
